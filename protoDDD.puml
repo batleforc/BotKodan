@@ -1,0 +1,36 @@
+@startuml
+
+package "Application" #DDDDDD {
+  class Discord
+}
+
+package "Domain" {
+  package ModelDomain{
+    interface IHomeWork{
+      String Label
+      Date Created
+      String By
+      Date Return
+      String Content
+    }
+  }
+  class HandlerHomeWork{
+    getHomeWork() : Array<IHomeWork>
+    createHomeWork(IHomeWork) : boolean
+    editHomeWork(Id,IHomeWork) : boolean
+    deleteHomeWork(Id) : boolean
+  }
+  interface Idb
+}
+
+package "Infrastructure"{
+  class Db
+  package "Model"{
+    class HomeWork
+  }
+}
+
+IHomeWork <|-- HomeWork
+Idb <|-- Db
+
+@enduml
