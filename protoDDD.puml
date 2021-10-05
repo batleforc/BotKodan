@@ -7,6 +7,7 @@ package "Application" #DDDDDD {
 package "Domain" {
   package ModelDomain{
     interface IHomeWork{
+      Int Id
       String Label
       Date Created
       String By
@@ -16,6 +17,7 @@ package "Domain" {
   }
   class HandlerHomeWork{
     getHomeWork() : Array<IHomeWork>
+    getHomeWork(Id) : IHomeWork
     createHomeWork(IHomeWork) : boolean
     editHomeWork(Id,IHomeWork) : boolean
     deleteHomeWork(Id) : boolean
