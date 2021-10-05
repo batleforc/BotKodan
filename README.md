@@ -1,6 +1,10 @@
 # Bot kodan
 
-## Fonctionnalité
+## DDD
+
+![protoDDD](./out/protoDDD/protoDDD.png)
+
+## Fonctionality
 
 - Agenda
 - Modification de l'agenda (check toute les [env.checkTime default: 1H] pour des modification)
@@ -52,11 +56,11 @@
 
 ## Wording
 
-| Word      | description                                            |
-| :-------- | :----------------------------------------------------- |
-| mvp       | Minimum viable product                                 |
-| GraphQL   | Process de communication avec l'api, différent du rest |
-| HotReload | Rechargement du service en cas de modification         |
+| Word      | description                               |
+| :-------- | :---------------------------------------- |
+| mvp       | Minimum viable product                    |
+| GraphQL   | Rest api equivalent that work differently |
+| HotReload | Reload services in case of modification   |
 
 ## Userfull link
 
