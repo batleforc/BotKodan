@@ -1,10 +1,27 @@
-@startuml
+@startuml ProtoDDD
 
-package "Application" #DDDDDD {
-  class Discord
+package "Application" as app #DDDDDD {
+  class Discord{
+    DiscordClient Client
+    Login(String)
+    SendMessage(Chan,Message)
+  }
+  package StoreDiscord{
+    class Conf{
+      String Token
+      String Prefix
+      Role Admin
+      Role Modo
+      String IdChanNotif
+    }
+    class Role{
+      Array<String> User
+      Array<String> Role
+    }
+  }
 }
 
-package "Domain" {
+package "Domain" as domain {
   package ModelDomain{
     interface IHomeWork{
       Int Id
@@ -25,14 +42,38 @@ package "Domain" {
   interface Idb
 }
 
-package "Infrastructure"{
+package "Infrastructure" as infra{
   class Db
   package "Model"{
     class HomeWork
+  }
+  package "AppConf"{
+    interface Store{
+      getDataByKey(string)
+      hasDataForKey(string)
+      putDataToKey(string)
+      connectStore(Env)
+      initStore(Env)
+    }
+    class StoreRedis
+    class StoreInMemory
+    Class StoreInFileFactory
+    package StoreInFile{
+      class StoreInFileYaml
+      class StoreInFileJson
+    }
   }
 }
 
 IHomeWork <|-- HomeWork
 Idb <|-- Db
+Store <|-- StoreRedis
+Store <|-- StoreInMemory
+Store <|-- StoreInFileFactory
+StoreInFileFactory <-- StoreInFile
+
+domain <-- infra
+domain <-- app
+infra <--> app
 
 @enduml
