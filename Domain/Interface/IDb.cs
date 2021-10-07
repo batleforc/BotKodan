@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Interface
 {
-    public interface IDb
+    public interface IDb<T>
     {
         public void ConnectDb();
         public void DisconnectDb();
 
-        public void GetModelItem<T>();
-        public void GetModelItem<T>(int id);
+        public void GetModelItem();
+        public void GetModelItem(int id);
 
-        public void CreateModelItem<T>(T item);
-        public void DeleteModelItem<T>(int id);
-        public void UpdateModelItem<T>(int id, T item);
+        public void CreateModelItem(T item);
+        public void DeleteModelItem(int id);
+        public void UpdateModelItem(int id, T item);
         
     }
 }
