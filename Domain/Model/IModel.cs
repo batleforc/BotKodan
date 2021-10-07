@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Model
 {
-    public class HomeWork : IModel
+    public abstract class IModel
     {
-        string Label;
-        DateTime Created;
-        string By;
-        DateTime Return;
-        String Content;
+        public int id;
     }
 }
