@@ -23,27 +23,27 @@ namespace Infra.Database
 
         public void DeleteModelItem(int id)
         {
-            listItem.FindIndex(item => item.id == id);
+            listItem.RemoveAt(listItem.FindIndex(item => item.id == id));
         }
 
         public void DisconnectDb()
         {
-            throw new NotImplementedException();
+            listItem = null;
         }
 
-        public void GetModelItem()
+        public List<T> GetModelItem()
         {
-            throw new NotImplementedException();
+            return listItem;
         }
 
-        public void GetModelItem(int id)
+        public T GetModelItem(int id)
         {
-            throw new NotImplementedException();
+            return listItem.Find(item => item.id == id);
         }
 
         public void UpdateModelItem(int id, T item)
         {
-            throw new NotImplementedException();
+            listItem[listItem.FindIndex(item => item.id == id)] = item;
         }
     }
 }

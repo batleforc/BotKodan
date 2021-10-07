@@ -11,8 +11,8 @@ namespace Domain.Interface
         public void ConnectDb();
         public void DisconnectDb();
 
-        public void GetModelItem();
-        public void GetModelItem(int id);
+        public List<T> GetModelItem();
+        public T GetModelItem(int id);
 
         public void CreateModelItem(T item);
         public void DeleteModelItem(int id);
