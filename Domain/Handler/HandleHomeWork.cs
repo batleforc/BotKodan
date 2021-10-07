@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Domain.Model;
 namespace Domain.Handler
 {
-    class HandleHomeWork
+    public class HandleHomeWork
     {
         public List<HomeWork> GetHomeWork()
         {
