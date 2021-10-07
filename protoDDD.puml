@@ -23,7 +23,7 @@ package "Application" as app #DDDDDD {
 
 package "Domain" as domain {
   package ModelDomain{
-    interface IHomeWork{
+    class AHomeWork{
       Int Id
       String Label
       Date Created
