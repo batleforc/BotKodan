@@ -9,7 +9,7 @@ namespace Infra.Database
 {
     class InMemory<T> : IDb<T> where T:IModel
     {
-        private static List<T> listItem;
+        private List<T> listItem;
         
         public void ConnectDb()
         {
