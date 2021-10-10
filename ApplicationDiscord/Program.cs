@@ -12,6 +12,7 @@ namespace ApplicationDiscord
         private DiscordSocketClient _client;
         private CommandService _commands;
         private CommandHandler _commandHandler;
+        private InitialiseDiscordService _serviceProvider;
         public static void Main(string[] args)
         => new Program().MainAsync().GetAwaiter().GetResult();
 
@@ -24,16 +25,18 @@ namespace ApplicationDiscord
         private async Task NewMessage(SocketMessage newMsg)
         {
             SocketGuildChannel chan = newMsg.Channel as SocketGuildChannel;
-            String from = chan != null ? $"{chan.Guild.Name} > {chan.Name}" : "MP";
-            Console.WriteLine($"{newMsg.Timestamp.UtcDateTime} : {from} : {newMsg.Author} => {newMsg}");
+            string from = chan != null ? $"{chan.Guild.Name} > {chan.Name}" : "MP";
+            string author = chan != null ? $"{newMsg.Author} ({(newMsg.Author as SocketGuildUser).Nickname})" : newMsg.Author.ToString();
+            Console.WriteLine($"{newMsg.Timestamp.UtcDateTime} : {from} : {author} => {newMsg}");
         }
 
         public async Task MainAsync()
         {
-            var _config = new DiscordSocketConfig { MessageCacheSize = 100 };
+            DiscordSocketConfig _config = new DiscordSocketConfig { MessageCacheSize = 100 };
             _client = new DiscordSocketClient(_config);
             _commands = new CommandService();
-            _commandHandler = new CommandHandler(_client, _commands);
+            _serviceProvider = new InitialiseDiscordService(_commands, _client);
+            _commandHandler = new CommandHandler(_serviceProvider.BuildServiceProvider(), _client, _commands);
             _client.Log += Log;
             await _client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("BotToken"));
             await _client.StartAsync();
