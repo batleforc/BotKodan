@@ -7,9 +7,9 @@ using Domain.Interface;
 using Domain.Model;
 namespace Infra.Database
 {
-    class InMemory<T> : IDb<T> where T:IModel
+    public class InMemory<T> : IDb<T> where T:IModel
     {
-        private List<T> listItem;
+        private static List<T> listItem;
         
         public void ConnectDb()
         {
