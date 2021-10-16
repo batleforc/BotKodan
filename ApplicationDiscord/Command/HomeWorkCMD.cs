@@ -28,7 +28,7 @@ namespace ApplicationDiscord.Command
       else
         foreach (HomeWork homework in handlehomeWork.GetHomeWork())
         {
-          await Context.Channel.SendMessageAsync(homework.ToString());
+          await ReplyAsync(homework.ToString());
         }
     }
 
@@ -67,6 +67,23 @@ namespace ApplicationDiscord.Command
         }
       }
       Context.Client.MessageReceived += awaitResponse;
+    }
+
+    [Command("update")]
+    public async Task updateHomeWork(int id, HomeWorkParameter homeWorkParameter)
+    {
+      HomeWork homeWork = handlehomeWork.GetHomeWork(id);
+      homeWork.Label = homeWorkParameter.Label ?? homeWork.Label;
+      homeWork.Matter = homeWorkParameter.Matter ?? homeWork.Matter;
+      homeWork.Content = homeWorkParameter.Content ?? homeWork.Content;
+      DateTime whenToReturn;
+      bool worked = DateTime.TryParse(homeWorkParameter.Due, out whenToReturn);
+      if (worked)
+      {
+        homeWork.Return = whenToReturn;
+      }
+      handlehomeWork.EditHomeWork(id, homeWork);
+      await ReplyAsync($"{homeWork.Label} : has been updated to => {homeWork}");
     }
   }
 }
