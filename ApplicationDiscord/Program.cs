@@ -22,7 +22,7 @@ namespace ApplicationDiscord
       return Task.CompletedTask;
     }
 
-    private async Task NewMessage(SocketMessage newMsg)
+    private Task NewMessage(SocketMessage newMsg)
     {
       if (Environment.GetEnvironmentVariable("DOT_ENV") == "Dev")
       {
@@ -31,6 +31,7 @@ namespace ApplicationDiscord
         string author = chan != null ? $"{newMsg.Author} ({(newMsg.Author as SocketGuildUser).Nickname})" : newMsg.Author.ToString();
         Console.WriteLine($"{newMsg.Timestamp.UtcDateTime} : {from} : {author} => {newMsg}");
       }
+      return Task.CompletedTask;
     }
 
     public async Task MainAsync()
