@@ -23,7 +23,7 @@ namespace Domain.Model
 
     public HomeWork(HomeWork homeWork)
     {
-      Console.WriteLine("John: " + homeWork.ToString());
+      id = homeWork.id;
       Label = homeWork.Label;
       Matter = homeWork.Matter;
       Created = homeWork.Created;

@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "SandBox": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DB_NAME": "Flibbertigibbet",
+        "DB_PROVIDER": "PostgreSQL",
+        "BotToken": "ODI0NjM1NTk5MzU2NDI4MzA4.YFyPvw.TxasnooLI53m-TSYge7eD4-WDnQ",
+        "DB_CONNECTIONSTRING": "Server=localhost;Port=5432;Database=Flibbertigibbet;User Id=csharp;Password=Caput_Draconis;",
+        "DOT_ENV": "Dev"
+      },
+      "jsWebView2Debugging": false
+    }
+  }
+}

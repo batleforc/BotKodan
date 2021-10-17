@@ -10,6 +10,9 @@ using Infra.Database;
 using Domain.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Domain.Handler;
+using Domain.Interface;
+using Infra.Database.inDatabase;
+using LinqToDB.Data;
 
 namespace ApplicationDiscord
 {
@@ -17,16 +20,17 @@ namespace ApplicationDiscord
     {
 		private readonly CommandService _commands;
 		private readonly DiscordSocketClient _client;
-		private InMemory<HomeWork> _database;
+		private IDb<HomeWork> _database;
 		private HandleHomeWork _handler;
 
 		public InitialiseDiscordService(CommandService commands = null, DiscordSocketClient client = null)
 		{
 			_commands = commands ?? new CommandService();
 			_client = client ?? new DiscordSocketClient();
-			_database = new InMemory<HomeWork>();
+			DataConnection.DefaultSettings = new ConnectionSettings();
+			_database = new InDatabase<HomeWork>();
 			_database.ConnectDb();
-			_handler = new HandleHomeWork(new InMemory<HomeWork>());
+			_handler = new HandleHomeWork(_database);
 		}
 
 		public IServiceProvider BuildServiceProvider() => new ServiceCollection()

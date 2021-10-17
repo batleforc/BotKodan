@@ -8,6 +8,6 @@ namespace Domain.Model
 {
     public abstract class IModel
     {
-        public int id;
+        public int id { get; set; }
     }
 }
